@@ -1,0 +1,116 @@
+/* Modern & Elegant Landing Page */
+.landing-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: linear-gradient(-45deg, #f5f7fa, #c3cfe2, #a8c0ff, #3f2b96);
+    background-size: 400% 400%;
+    animation: gradientBG 10s ease infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animated Background Gradient */
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Glassmorphism Effect */
+.landing-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    z-index: 1;
+}
+
+.landing-content {
+    max-width: 850px;
+    text-align: center;
+    padding: 3rem;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.landing-content h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+    line-height: 1.2;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.landing-content .full-stop {
+    color: #3498db;
+}
+
+.landing-text {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #34495e;
+    margin-bottom: 2rem;
+}
+
+.landing-text p {
+    margin-bottom: 1rem;
+}
+
+.gold-hr {
+    border: none;
+    height: 3px;
+    background: linear-gradient(90deg, #f1c40f, #f39c12);
+    margin: 2rem auto;
+    width: 100px;
+}
+
+/* Buttons with Animation */
+.btn-primary {
+    background: linear-gradient(90deg, #3498db, #2980b9);
+    border: none;
+    padding: 1rem 2.5rem;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(90deg, #2980b9, #1f618d);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    .landing-content {
+        padding: 2rem;
+        margin: 1rem;
+    }
+    .landing-content h1 {
+        font-size: 2.5rem;
+    }
+    .landing-text {
+        font-size: 1.1rem;
+    }
+}

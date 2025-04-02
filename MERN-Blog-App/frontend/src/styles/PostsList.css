@@ -1,0 +1,57 @@
+.posts-list {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.posts-list h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.posts-list h1 .full-stop {
+    color: #3498db;
+}
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+}
+
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+    color: #3498db;
+}
+
+.btn-link {
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: #3498db;
+    text-decoration: none;
+    padding: 1rem;
+    margin-top: 2rem;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.btn-link:hover {
+    color: #2980b9;
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    .posts-list {
+        padding: 1rem;
+    }
+
+    .posts-list h1 {
+        font-size: 2rem;
+    }
+} 
