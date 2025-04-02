@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "main": "craco.config.js",
   "type": "module",
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject"
+  },
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^36.0.1",
     "@ckeditor/ckeditor5-react": "^5.1.0",
@@ -844,10 +850,6 @@
     "yargs-parser": "^20.2.9",
     "yn": "^3.1.1",
     "yocto-queue": "^0.1.0"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
