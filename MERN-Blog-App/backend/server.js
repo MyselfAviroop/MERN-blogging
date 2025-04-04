@@ -20,11 +20,28 @@ app.options('*', cors());
 
 app.use(express.json());
 
+// MongoDB connection with optimized settings for serverless
+const connectDB = async () => {
+  try {
+    const uri = process.env.MONGO_URI;
+    const options = {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
+      socketTimeoutMS: 45000, // Close sockets after 45s of inactivity
+      maxPoolSize: 10,
+      minPoolSize: 5
+    };
+
+    await mongoose.connect(uri, options);
+    console.log("MongoDB connection has been established!");
+  } catch (err) {
+    console.error("MongoDB connection error:", err);
+  }
+};
+
 // Connect to MongoDB
-const uri = process.env.MONGO_URI;
-mongoose.connect(uri)
-  .then(() => console.log("MongoDB connection has been established!"))
-  .catch((err) => console.error("MongoDB connection error:", err));
+connectDB();
 
 // Routes
 import postsRouter from "./routes/posts.js";
