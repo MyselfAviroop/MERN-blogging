@@ -1,7 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-import path from "path";
 import { config } from "dotenv";
 
 // Load environment variables
@@ -11,9 +10,6 @@ config();
 const app = express();
 app.use(express.json());
 app.use(cors());
-
-// Set PORT
-const PORT = process.env.PORT || 5100;
 
 // Connect to MongoDB
 const uri = process.env.MONGO_URI;
@@ -26,19 +22,18 @@ import postsRouter from "./routes/posts.js";
 import authRouter from "./routes/auth.js";
 import { protect } from "./middleware/authMiddleware.js";
 
-app.use("/auth", authRouter);
-app.use("/server/posts", protect, postsRouter);
 app.get("/", (req, res) => {
-  res.send(" running...");
+  res.send("API is running...");
 });
-// Serve frontend in production
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "frontend", "build")));
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
-  });
-}
+app.use("/api/auth", authRouter);
+app.use("/api/posts", protect, postsRouter);
 
-// Start server
-app.listen(PORT, () => console.log(`Server is running at PORT ${PORT}!`));
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: "Something went wrong!" });
+});
+
+// For Vercel serverless
+export default app;
