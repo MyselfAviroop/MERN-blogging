@@ -28,7 +28,9 @@ import { protect } from "./middleware/authMiddleware.js";
 
 app.use("/auth", authRouter);
 app.use("/server/posts", protect, postsRouter);
-
+app.get("/", (req, res) => {
+  res.send(" running...");
+});
 // Serve frontend in production
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "frontend", "build")));
