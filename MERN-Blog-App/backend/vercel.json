@@ -39,7 +39,8 @@
     "functions": {
         "server.js": {
             "memory": 1024,
-            "maxDuration": 10
+            "maxDuration": 15,
+            "includeFiles": "node_modules/**"
         }
     }
 } 
