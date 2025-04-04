@@ -13,9 +13,11 @@
             "headers": {
                 "Access-Control-Allow-Origin": "https://mern-blogging-3zvq.vercel.app",
                 "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-                "Access-Control-Allow-Headers": "Content-Type, Authorization",
-                "Access-Control-Allow-Credentials": "true"
-            }
+                "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Requested-With",
+                "Access-Control-Allow-Credentials": "true",
+                "Access-Control-Max-Age": "86400"
+            },
+            "continue": false
         },
         {
             "src": "/(.*)",
@@ -23,13 +25,21 @@
             "headers": {
                 "Access-Control-Allow-Origin": "https://mern-blogging-3zvq.vercel.app",
                 "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-                "Access-Control-Allow-Headers": "Content-Type, Authorization",
-                "Access-Control-Allow-Credentials": "true"
-            }
+                "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Requested-With",
+                "Access-Control-Allow-Credentials": "true",
+                "Access-Control-Max-Age": "86400"
+            },
+            "continue": false
         }
     ],
     "env": {
-        "NODE_ENV": "production"
-    "PORT":"5100"
+        "NODE_ENV": "production",
+        "PORT": "5100"
+    },
+    "functions": {
+        "server.js": {
+            "memory": 1024,
+            "maxDuration": 10
+        }
     }
 } 
