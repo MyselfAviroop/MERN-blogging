@@ -7,7 +7,8 @@ const api = axios.create({
     headers: {
         'Content-Type': 'application/json'
     },
-    withCredentials: true
+    withCredentials: true,
+    mode: 'cors'
 });
 
 // Add token to requests if it exists
