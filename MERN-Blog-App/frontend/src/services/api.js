@@ -6,7 +6,8 @@ const api = axios.create({
     baseURL,
     headers: {
         'Content-Type': 'application/json'
-    }
+    },
+    withCredentials: true
 });
 
 // Add token to requests if it exists
@@ -17,6 +18,18 @@ api.interceptors.request.use((config) => {
     }
     return config;
 });
+
+// Add response interceptor to handle errors
+api.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        if (error.response?.status === 401) {
+            sessionStorage.removeItem('token');
+            window.location.href = '/login';
+        }
+        return Promise.reject(error);
+    }
+);
 
 export const getPosts = (page = 1) => api.get(`/posts?page=${page}`);
 export const getPost = (id) => api.get(`/posts/${id}`);
