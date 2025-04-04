@@ -22,6 +22,7 @@ app.use(express.json());
 
 // Cache the MongoDB connection
 let cachedDb = null;
+let isConnecting = false;
 
 // MongoDB connection with optimized settings for serverless
 const connectDB = async () => {
@@ -31,35 +32,53 @@ const connectDB = async () => {
       return cachedDb;
     }
 
+    if (isConnecting) {
+      console.log("Connection in progress, waiting...");
+      return new Promise((resolve, reject) => {
+        const checkConnection = setInterval(() => {
+          if (cachedDb) {
+            clearInterval(checkConnection);
+            resolve(cachedDb);
+          }
+        }, 100);
+      });
+    }
+
+    isConnecting = true;
     const uri = process.env.MONGO_URI;
     console.log("Attempting to connect to MongoDB Atlas...");
-    console.log("MongoDB URI:", uri ? "URI exists" : "URI is missing");
     
     const options = {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 5000,
-      socketTimeoutMS: 45000,
-      maxPoolSize: 10,
-      minPoolSize: 5,
-      connectTimeoutMS: 10000,
+      serverSelectionTimeoutMS: 2000, // Further reduced for faster failure detection
+      socketTimeoutMS: 20000, // Further reduced for serverless
+      maxPoolSize: 3, // Further reduced for serverless
+      minPoolSize: 1,
+      connectTimeoutMS: 3000, // Further reduced for serverless
       retryWrites: true,
       w: 'majority',
-      appName: 'Cluster0'
+      appName: 'Cluster0',
+      maxIdleTimeMS: 20000, // Reduced idle time
+      heartbeatFrequencyMS: 5000, // More frequent health checks
+      autoIndex: false,
+      family: 4 // Force IPv4
     };
 
     const db = await mongoose.connect(uri, options);
     console.log("MongoDB Atlas connection has been established!");
     cachedDb = db;
+    isConnecting = false;
     return db;
   } catch (err) {
+    isConnecting = false;
     console.error("MongoDB connection error details:", {
       name: err.name,
       message: err.message,
       code: err.code,
       stack: err.stack
     });
-    throw err; // Re-throw to handle in the route
+    throw err;
   }
 };
 
