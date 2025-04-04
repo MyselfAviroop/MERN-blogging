@@ -8,8 +8,17 @@ config();
 
 // Initialize Express app
 const app = express();
+
+// CORS configuration
+app.use(cors({
+  origin: 'https://mern-blogging-3zvq.vercel.app',
+  credentials: true
+}));
+
+// Handle preflight requests
+app.options('*', cors());
+
 app.use(express.json());
-app.use(cors());
 
 // Connect to MongoDB
 const uri = process.env.MONGO_URI;
