@@ -32,13 +32,13 @@ api.interceptors.response.use(
     }
 );
 
-export const getPosts = (page = 1) => api.get(`/posts?page=${page}`);
-export const getPost = (id) => api.get(`/posts/${id}`);
-export const createPost = (data) => api.post('/posts', data);
-export const updatePost = (id, data) => api.put(`/posts/${id}`, data);
-export const deletePost = (id) => api.delete(`/posts/${id}`);
-export const login = (credentials) => api.post('/auth/login', credentials);
-export const register = (userData) => api.post('/auth/register', userData);
-export const getProfile = () => api.get('/auth/profile');
+export const getPosts = (page = 1) => api.get(`/api/posts?page=${page}`);
+export const getPost = (id) => api.get(`/api/posts/${id}`);
+export const createPost = (data) => api.post('/api/posts', data);
+export const updatePost = (id, data) => api.put(`/api/posts/${id}`, data);
+export const deletePost = (id) => api.delete(`/api/posts/${id}`);
+export const login = (credentials) => api.post('/api/auth/login', credentials);
+export const register = (userData) => api.post('/api/auth/register', userData);
+export const getProfile = () => api.get('/api/auth/profile');
 
 export default api; 
