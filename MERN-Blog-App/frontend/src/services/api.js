@@ -47,8 +47,9 @@ export const createPost = (data) => api.post('/posts', data);
 export const updatePost = (id, data) => api.put(`/posts/${id}`, data);
 export const deletePost = (id) => api.delete(`/posts/${id}`);
 
-export const login = (credentials) => api.post('/auth/login', credentials);
-export const register = (userData) => api.post('/auth/register', userData);
-export const getProfile = () => api.get('/auth/profile');
+export const login = (credentials) => api.post('/api/auth/login', credentials);
+export const register = (userData) => api.post('/api/auth/register', userData);
+export const getProfile = () => api.get('/api/auth/profile');
+
 
 export default api;
