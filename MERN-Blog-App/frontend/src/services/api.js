@@ -10,6 +10,25 @@ const api = axios.create({
     withCredentials: true,
     mode: 'cors'
 });
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    console.error("Axios response error:", {
+      message: error.message,
+      status: error?.response?.status,
+      data: error?.response?.data,
+      url: error?.config?.url
+    });
+
+    if (error.response?.status === 401) {
+      sessionStorage.removeItem('token');
+      window.location.href = '/login';
+    }
+
+    return Promise.reject(error);
+  }
+);
+
 
 // Add token to requests if it exists
 api.interceptors.request.use((config) => {
