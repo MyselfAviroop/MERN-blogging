@@ -35,12 +35,5 @@
     "env": {
         "NODE_ENV": "production",
         "PORT": "5100"
-    },
-    "functions": {
-        "server.js": {
-            "memory": 1024,
-            "maxDuration": 30,
-            "includeFiles": "node_modules/**"
-        }
     }
-} 
+}
